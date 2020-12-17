@@ -19,12 +19,20 @@ public class MatrixGraph {
         }
         for (int i = 0; i < size; i++) {
             for(int j = 0; j < size; j++){
+                if(i == j){
+                    matrix[i][j] = -1; //the edge should
+                    continue;
+                }
                 matrix[i][j] = 0;
             }
         }
     }
 
     public void print(){
+        for (char i: vertexs) {
+            System.out.print(i+" ");
+        }
+        System.out.println();
         for(int[] i:matrix){
             for(int j:i){
                 System.out.print(j+" ");
@@ -105,13 +113,13 @@ public class MatrixGraph {
         Random ran1 = new Random();
         int c = 0;
         // set red vertexs
-        do {
+        while (c != num){
             int tmp = ran1.nextInt(range);
             if(vertexs[tmp] != 'r') {
                 vertexs[tmp] = 'r';
                 c++;
             }
-        } while (c != num);
+        }
 
     }
 
@@ -122,15 +130,15 @@ public class MatrixGraph {
         Random ran1 = new Random();
         int c = 0;
         // set blue edges
-        do {
+        while (c != num){
             int i = ran1.nextInt(range);
             int j = ran1.nextInt(range);
             // red edge is 0, blue edge is 1
-            if(matrix[i][j] != 1) {
+            if(matrix[i][j] != 1 && i != j) {
                 matrix[i][j] = 1;
                 c++;
             }
-        } while (c != num);
+        }
 
     }
 
@@ -154,12 +162,30 @@ public class MatrixGraph {
     public int getRedOutDegreMaxVertex(){
         int Max = 0, v = -1;
         for(int i = 0; i < size; i++){
-            if(vertexs[i] == 'd') continue;
+            if(vertexs[i] != 'r') continue;
             int count = 0;
             for(int j = 0; j < size; j++){
                 if(matrix[i][j] == 0) count++;
             }
-            if(Max < count){
+            if(Max <= count){
+                v = i;
+                Max = count;
+            }
+        }
+        //if v = -1, no red out degre
+        return v;
+    }
+
+
+    public int getBlueInDegreMaxVertex(){
+        int Max = 0, v = -1;
+        for(int i = 0; i < size; i++){
+            if(vertexs[i] != 'r') continue;
+            int count = 0;
+            for(int j = 0; j < size; j++){
+                if(matrix[j][i] == 1) count++;
+            }
+            if(Max <= count){
                 v = i;
                 Max = count;
             }
