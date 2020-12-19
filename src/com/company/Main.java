@@ -16,7 +16,7 @@ public class Main {
             System.out.print(df.format(p/100) + "\t");
             for(double q = 0; q <= 100; q+=10){
                 double sum = 0;
-                for(int i = 0; i < 100; i++) {
+                for(int i = 0; i < 1000; i++) {
                     if(k == 1)
                         sum += algorithme1.doAlgorithme(p/100, q/100, 100);
                     else if(k == 2)
@@ -24,7 +24,7 @@ public class Main {
                 }
 //                matrixGraph.print();
 
-                System.out.print(df.format(sum/100) + "\t");
+                System.out.print(df.format(sum/1000) + "\t");
             }
             System.out.println();
         }
@@ -32,8 +32,8 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println("algorithm1");
-        main.print(1);
+//        System.out.println("algorithm1");
+//        main.print(1);
         System.out.println("algorithm2");
         main.print(2);
 
