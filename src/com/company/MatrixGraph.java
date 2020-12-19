@@ -202,4 +202,13 @@ public class MatrixGraph {
         }
         return n;
     }
+
+    public static void main(String[] args) {
+        int size = 100;
+        double p = 0.1, q = 0.8;
+        MatrixGraph matrixGraph = new MatrixGraph(size);
+        matrixGraph.setRandomRedVertex((int)(p*size),size);
+        matrixGraph.setRandomBlueEdge((int)(q*size*(size-1)),size);
+        matrixGraph.print();
+    }
 }
